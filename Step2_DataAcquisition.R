@@ -2,24 +2,6 @@
 # STEP 2: DATA ACQUISITION 
 # ============================================
 
-# load Required Packages
-library(tidycensus)
-library(dplyr)
-library(tidyverse)
-library(rvest)
-library(stringr)
-library(naniar)
-library(broom)
-library(tigris)
-library(sf)
-library(ggplot2)
-library(broom)
-library(shiny)
-library(DT)
-library(bslib)
-library(rpart)
-library(rpart.plot)
-
 # --------------------------------------------------
 # 1. Register Census API Key
 # --------------------------------------------------
