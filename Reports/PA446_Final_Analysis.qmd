@@ -10,6 +10,7 @@ format:
 execute:
   warning: false
   message: false
+runtime: shiny
 ---
 
 ## 1. Introduction
@@ -146,6 +147,99 @@ tidy(model_all) %>%
   ) +
   theme_minimal()
 ```
+
+This regression coefficient plot illustrates the associations between ZIP-level CSC scores and key socioeconomic factors. The results show that the percentage of non-English-speaking residents is the only variable with a clear positive effect, indicating the strongest relationship with CSC scores. In contrast, poverty rate, racial composition, and educational attainment display small effect sizes with confidence intervals that cross zero, suggesting that these factors are not strong predictors of arts education levels.
+
+**3. How do CSC scores relate to each factor individually?**
+
+```{r}
+# Interactive Shiny Dashboard
+# The dashboard allows:
+# - selecting a socioeconomic predictor for scatter plot
+# - viewing first N ZIP rows in a data table
+# - personalized greeting using user name input
+
+df <- zip_summary   # ZIP-level dataset for dashboard
+
+# Numeric predictors available in scatter plot
+num_cols <- c("poverty_rate", "pct_nonwhite", "pct_non_english", "pct_noncollege")
+
+# UI layout
+ui <- fluidPage(
+  theme = bs_theme(version = 5, bootswatch = "flatly"),
+  
+  div(style = "padding: 12px 0; font-weight: 600; font-size: 1.2rem;",
+      textOutput("greet")
+  ),
+  
+  sidebarLayout(
+    sidebarPanel(
+      h4("Controls"),
+      textInput("name", "What is your name?"),
+      
+      selectInput(
+        "xvar",
+        "Select predictor (X-axis):",
+        choices = num_cols,
+        selected = "pct_nonwhite"
+      ),
+      
+      numericInput(
+        "nrows",
+        "Number of ZIP rows to show:",
+        value = 10, min = 1, max = nrow(df)
+      )
+    ),
+    
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Scatter Plot", plotOutput("scatter", height = 420)),
+        tabPanel("ZIP Table", DTOutput("table"))
+      )
+    )
+  )
+)
+
+# SERVER logic
+server <- function(input, output, session) {
+  
+  # Greeting message updates depending on user input
+  output$greet <- renderText({
+    nm <- trimws(input$name)
+    if (nm == "" || is.null(nm))
+      "Welcome to the Chicago Arts Edu Equity Explorer!"
+    else
+      paste0("Hello, ", nm, "! Explore how local conditions shape CSC scores.")
+  })
+  
+  # Scatter plot (Y-axis fixed as avg_CSC)
+  output$scatter <- renderPlot({
+    ggplot(df, aes(x = .data[[input$xvar]], y = avg_CSC)) +
+      geom_point(size = 3, alpha = 0.8, color = "#0072B2") +
+      geom_smooth(method = "lm", color = "red", se = TRUE) +
+      labs(
+        x = input$xvar,
+        y = "Average CSC Score",
+        title = "Relationship Between CSC Score and Socioeconomic Factors"
+      ) +
+      theme_minimal(base_size = 14)
+  })
+  
+  # Display first N rows of ZIP summary data
+  output$table <- renderDT({
+    datatable(
+      df %>% head(input$nrows),
+      rownames = FALSE,
+      options = list(pageLength = input$nrows)
+    )
+  })
+}
+
+# RUN THE APP
+shinyApp(ui, server)
+```
+
+The dashboard shows that CSC scores do not exhibit strong linear relationships with any single socioeconomic factor. While there are minor regional differences and generally weak associations overall, none of the ZIP-level indicators serve as strong standalone predictors of arts education quality in Chicago. However, the share of residents without a college degree shows a slight positive trend, suggesting a potential but modest association that may relate to local educational or cultural access patterns.
 
 ## 5. Advanced Analysis - Machine Learning
 

@@ -6,6 +6,7 @@
 # 1. Load cleaned dataset (from Step 3)
 # --------------------------------------------------
 arts_full <- read_csv("arts_full_clean.csv")
+arts_full <- arts_full %>% mutate(zip = as.character(zip))
 
 # --------------------------------------------------
 # 2. Aggregate data to ZIP level
