@@ -80,6 +80,7 @@ arts_full <- arts_full %>% mutate(zip = as.character(zip))
 ```
 
 **1. Are arts education levels (CSC scores) evenly distributed across Chicago?**
+
 ```{r}
 # Aggregate to ZIP level
 zip_summary <- arts_full %>%
@@ -112,7 +113,39 @@ ggplot(chi_map) +
   ) +
   theme_minimal()
 ```
+
 CSC scores show clear spatial inequality across Chicago: higher-scoring ZIP codes are concentrated in the North Side and near Downtown, while lower-scoring areas cluster in the South and West Sides.
+
+**2. Which socioeconomic factors are associated with CSC scores?**
+
+```{r}
+# Regression Model
+model_all <- lm(
+  avg_CSC ~ poverty_rate + pct_nonwhite + pct_non_english + pct_noncollege,
+  data = zip_summary
+)
+
+# Print regression output
+summary(model_all)
+
+# Visualize Regression Coefficients
+tidy(model_all) %>%
+  filter(term != "(Intercept)") %>%   
+  ggplot(aes(x = reorder(term, estimate), y = estimate)) +
+  geom_point(size = 3) +
+  geom_errorbar(
+    aes(ymin = estimate - std.error,
+        ymax = estimate + std.error),
+    width = 0.2
+  ) +
+  coord_flip() +
+  labs(
+    title = "Effect Sizes of Predictors on CSC Score",
+    x = "Predictor",
+    y = "Coefficient"
+  ) +
+  theme_minimal()
+```
 
 ## 5. Advanced Analysis - Machine Learning
 
