@@ -241,7 +241,8 @@ shinyApp(ui, server)
 
 The dashboard shows that CSC scores do not exhibit strong linear relationships with any single socioeconomic factor. While there are minor regional differences and generally weak associations overall, none of the ZIP-level indicators serve as strong standalone predictors of arts education quality in Chicago. However, the share of residents without a college degree shows a slight positive trend, suggesting a potential but modest association that may relate to local educational or cultural access patterns.
 
-## 5. Advanced Analysis - Machine 
+## 5. Advanced Analysis - Machine Learning
+
 This decision tree analysis aims to identify the combinational patterns of socioeconomic factors that distinguish High versus Low CSC scores. The model evaluates all four variables simultaneously and automatically determines which combinations of conditions are associated with ZIP codes classified as having higher CSC levels.
 ```{r}
 # Create binary outcome for classification
@@ -278,6 +279,12 @@ rpart.plot(
   main = "Decision Tree Predicting High vs Low CSC Score"
 )
 ```
+
 The decision tree shows that CSC levels are most clearly separated by a single factor: the percentage of adults without a college degree. ZIP codes where less than 80% of residents lack a college degree were classified as High CSC with an 83% probability, whereas ZIPs at or above 80% were classified as Low CSC with an 85% probability. This aligns with earlier findings that socioeconomic variables are generally weak predictors of CSC scores, though educational attainment appears to show a modest association at the ZIP level.
 
 ## 6. Conclusion
+This analysis examined the spatial distribution of arts education levels (CSC scores) across Chicago ZIP codes and explored the socioeconomic factors that may shape these patterns. The spatial visualization revealed clear geographic disparities: higher CSC levels were concentrated in the North and central areas of the city, while lower levels appeared more frequently in the South and West Sides. However, regression analysis and interactive dashboard exploration showed that individual socioeconomic indicators, such as poverty rate, racial composition, non-English-speaking households, and educational attainment, displayed only weak associations with CSC scores, suggesting limited explanatory power.
+
+The machine learning decision tree analysis reinforced these findings. Although the model evaluated all variables simultaneously, the percentage of adults without a college degree emerged as the single most informative factor for distinguishing High versus Low CSC ZIP codes. Additional variables or combinations did not improve classification accuracy. This suggests that socioeconomic indicators at the ZIP level alone do not strongly predict arts education quality, and that broader structural, institutional, or community-level factors may play a more significant role.
+
+Overall, this study highlights that arts education equity cannot be fully explained by simple socioeconomic metrics, underscoring the complexity of the issue. From a policy perspective, this implies that interventions should go beyond demographic or economic characteristics and instead focus on strengthening community partnerships, improving program access, and supporting culturally and linguistically diverse learning environments. Future research may incorporate school-level operational data or partnership network information to develop more nuanced and predictive models.
