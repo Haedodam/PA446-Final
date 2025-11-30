@@ -1,12 +1,6 @@
 # ==========================================================
 # STEP 0: LOAD REQUIRED PACKAGES
 # ==========================================================
-# This script loads all R packages used across Steps 2–5.
-# It is recommended to source this file at the beginning of
-# each step script and at the top of the Quarto report.
-# Example:
-#     source("scripts/step0_load_packages.R")
-# ==========================================================
 
 # Data access & wrangling
 library(tidycensus)
