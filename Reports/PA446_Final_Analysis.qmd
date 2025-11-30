@@ -14,6 +14,14 @@ execute:
 
 ## 1. Introduction
 
+Arts education plays a critical role in supporting students’ academic achievement, social, emotional development, and long-term civic engagement. Despite its importance, access to high-quality arts programming in Chicago Public Schools (CPS) varies substantially across neighborhoods, raising persistent concerns about educational equity.
+
+To evaluate arts education environments and program quality, CPS operates the Creative Schools Certification (CSC) system, which categorizes schools into four levels: Emerging, Developing, Strong, and Excelling. While CSC provides a useful benchmark for school-level arts access, there has been limited analysis of how these scores relate to broader socioeconomic conditions across ZIP codes, and which communities may be structurally disadvantaged in receiving robust arts education.
+
+This project examines **how neighborhood-level socioeconomic factors, such as poverty rate, racial composition, linguistic diversity, and educational attainment, are associated with CSC outcomes across Chicago ZIP codes**. Using spatial visualization, the analysis identifies geographic patterns of inequality, and applies a decision tree classifier to explore which factors most strongly differentiate high- and low-scoring areas.
+
+The goal of this study is to provide a data-driven understanding of inequities in arts education across Chicago, and to offer empirical insights for identifying which neighborhoods require targeted support, as well as potential policy strategies to advance arts education equity citywide.
+
 ## 2. Data Acquisition
 
 ## 3. Data Wrangling & Quality Checks
