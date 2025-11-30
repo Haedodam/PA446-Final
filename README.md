@@ -14,15 +14,15 @@ Description: Contains ZIP code-level socioeconomic indicators (ACS 5-year estima
 
 **3. How to Replicate the Analysis**
 All scripts are located in the Scripts/ directory and are numbered in order of execution.
-Step 0. Load required packages
+1) Load required packages
 source("Scripts/Step0_RequiredPackages.R")
-Step 2. Acquire or load data
+2) Acquire or load data
 source("Scripts/Step2_DataAcquisition.R")
-Step 3. Clean and prepare data
+3) Clean and prepare data
 source("Scripts/Step3_DataWrangling_and_QualityChecks.R")
-Step 4. Run descriptive and spatial analysis
+4) Run descriptive and spatial analysis
 source("Scripts/Step4_ReproducibleReporting_Analysis.R")
-Step 5. Run regression and machine learning models
+5) Run regression and machine learning models
 source("Scripts/Step5_AdvancedAnalysis_MLR.R")
 
 **4. Reports**
