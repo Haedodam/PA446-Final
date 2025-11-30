@@ -54,7 +54,7 @@ This section investigates three core analytical questions:\
 2. Which socioeconomic factors are associated with CSC scores?\
 3. How do CSC scores relate to each factor individually?
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 # Load required packages
 library(tidyverse)
 library(tidycensus)
@@ -74,7 +74,7 @@ library(rpart.plot)
 options(tigris_use_cache = TRUE)
 ```
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 # Load cleaned datasets
 arts_full <- readr::read_csv("../data/arts_full.csv")
 arts_full <- arts_full %>% mutate(zip = as.character(zip))
@@ -241,6 +241,43 @@ shinyApp(ui, server)
 
 The dashboard shows that CSC scores do not exhibit strong linear relationships with any single socioeconomic factor. While there are minor regional differences and generally weak associations overall, none of the ZIP-level indicators serve as strong standalone predictors of arts education quality in Chicago. However, the share of residents without a college degree shows a slight positive trend, suggesting a potential but modest association that may relate to local educational or cultural access patterns.
 
-## 5. Advanced Analysis - Machine Learning
+## 5. Advanced Analysis - Machine 
+This decision tree analysis aims to identify the combinational patterns of socioeconomic factors that distinguish High versus Low CSC scores. The model evaluates all four variables simultaneously and automatically determines which combinations of conditions are associated with ZIP codes classified as having higher CSC levels.
+```{r}
+# Create binary outcome for classification
+# High CSC (>= 3)  → "High"
+# Low CSC (< 3)    → "Low"
+zip_summary$CSC_binary <- ifelse(zip_summary$avg_CSC >= 3, "High", "Low")
+
+# Fit Decision Tree Model
+# The predictors are four socioeconomic indicators.
+# The outcome variable is the binary CSC category.
+tree <- rpart(
+  CSC_binary ~ poverty_rate + pct_nonwhite + pct_non_english + pct_noncollege,
+  data = zip_summary,
+  method = "class"
+)
+
+# Plot the decision tree
+# Visualization settings:
+# - type = 3: show split labels and terminal node values
+# - extra = 104: display class probabilities and class predictions
+# - fallen.leaves = TRUE: tidy layout with leaves at the bottom
+# - box.palette = "RdBu": two-color gradient
+rpart.plot(
+  tree,
+  type = 3,
+  extra = 104,
+  under = TRUE,
+  fallen.leaves = TRUE,
+  roundint = FALSE,
+  clip.right.labs = FALSE,
+  box.palette = "RdBu",
+  border.col = "gray40",
+  cex = 0.9,
+  main = "Decision Tree Predicting High vs Low CSC Score"
+)
+```
+The decision tree shows that CSC levels are most clearly separated by a single factor: the percentage of adults without a college degree. ZIP codes where less than 80% of residents lack a college degree were classified as High CSC with an 83% probability, whereas ZIPs at or above 80% were classified as Low CSC with an 85% probability. This aligns with earlier findings that socioeconomic variables are generally weak predictors of CSC scores, though educational attainment appears to show a modest association at the ZIP level.
 
 ## 6. Conclusion
