@@ -1,0 +1,25 @@
+---
+title: "PA446 Final Project Report"
+author: "Haedodam Kim"
+date: "2025-12-10"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+execute:
+  warning: false
+  message: false
+---
+
+## 1. Introduction
+
+## 2. Data Acquisition
+
+## 3. Data Wrangling & Quality Checks
+
+## 4. Analysis
+
+## 5. Advanced Analysis - Machine Learning
+
+## 6. Conclusion
