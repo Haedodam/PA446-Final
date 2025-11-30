@@ -24,6 +24,22 @@ The goal of this study is to provide a data-driven understanding of inequities i
 
 ## 2. Data Acquisition
 
+This analysis draws on two primary data sources to examine the relationship between neighborhood socioeconomic conditions and arts education access across Chicago.
+
+First, we obtained ZIP Code-level indicators from the **American Community Survey (ACS) 2022 5-year estimates** using the API. Key variables included:
+
+-   Poverty rate
+
+-   Percent White (used to derive percent non-White)
+
+-   Percent English-only households (used to derive percent non-English-speaking)
+
+-   Percent of residents with a bachelor’s degree or higher (used to derive percent non-college)
+
+Second, we used the **Creative Schools Certification (CSC)** dataset provided through **Ingenuity’s ArtLook Maps**, a platform that documents CPS arts education resources, programs, and partnerships. ZIP codes were extracted from school address fields, and CSC levels (Emerging, Developing, Strong, Excelling) were converted into a numeric scale ranging from 1 to 4 to enable quantitative analysis.
+
+Finally, the ACS and ArtLook datasets were merged by ZIP code to create a unified dataset linking neighborhood socioeconomic conditions with arts education outcomes across Chicago.
+
 ## 3. Data Wrangling & Quality Checks
 
 ## 4. Analysis
