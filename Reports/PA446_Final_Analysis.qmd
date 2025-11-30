@@ -48,6 +48,72 @@ I also counted the number of schools within each ZIP code to assess representati
 
 ## 4. Analysis
 
+This section investigates three core analytical questions:\
+1. Are arts education levels (CSC scores) evenly distributed across Chicago?\
+2. Which socioeconomic factors are associated with CSC scores?\
+3. How do CSC scores relate to each factor individually?
+
+```{r}
+# Load required packages
+library(tidyverse)
+library(tidycensus)
+library(rvest)
+library(stringr)
+library(naniar)
+library(broom)
+library(tigris)
+library(sf)
+library(ggplot2)
+library(shiny)
+library(DT)
+library(bslib)
+library(rpart)
+library(rpart.plot)
+
+options(tigris_use_cache = TRUE)
+```
+
+```{r}
+# Load cleaned datasets
+arts_full <- readr::read_csv("../data/arts_full.csv")
+arts_full <- arts_full %>% mutate(zip = as.character(zip))
+```
+
+**1. Are arts education levels (CSC scores) evenly distributed across Chicago?**
+```{r}
+# Aggregate to ZIP level
+zip_summary <- arts_full %>%
+  group_by(zip) %>%
+  summarize(
+    avg_CSC        = mean(CSC_score, na.rm = TRUE),
+    poverty_rate   = unique(poverty_rate),
+    pct_nonwhite   = unique(pct_nonwhite),
+    pct_non_english= unique(pct_non_english),
+    pct_noncollege = unique(pct_noncollege),
+    n_schools      = n()
+  )
+
+# Load Chicago ZCTA shapefile (2020)
+chi_zcta <- zctas(cb = TRUE, year = 2020) %>%
+  mutate(zip = as.character(ZCTA5CE20)) %>%     
+  filter(zip %in% zip_summary$zip)              
+
+# Merge spatial data with aggregated ZIP summary
+chi_map <- chi_zcta %>%
+  left_join(zip_summary, by = "zip")
+
+# Map: Visualize spatial distribution of CSC scores
+ggplot(chi_map) +
+  geom_sf(aes(fill = avg_CSC), color = "white", size = 0.25) +
+  scale_fill_viridis_c(option = "plasma") +
+  labs(
+    title = "Average CSC Score by ZIP Code in Chicago",
+    fill  = "Avg CSC"
+  ) +
+  theme_minimal()
+```
+CSC scores show clear spatial inequality across Chicago: higher-scoring ZIP codes are concentrated in the North Side and near Downtown, while lower-scoring areas cluster in the South and West Sides.
+
 ## 5. Advanced Analysis - Machine Learning
 
 ## 6. Conclusion
