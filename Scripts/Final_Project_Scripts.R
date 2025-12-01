@@ -215,7 +215,7 @@ arts_full <- arts_full %>%
 # --------------------------------------------------
 # 6. Save cleaned dataset
 # --------------------------------------------------
-write_csv(arts_full, "arts_full_clean.csv")
+write_csv(arts_full, "arts_full.csv")
 
 # ==========================================================
 # STEP 4: REPRODUCIBLE REPORTING - ANALYSIS

@@ -7,6 +7,10 @@ format:
     toc: true
     toc-depth: 3
     code-fold: true
+    self-contained: true
+  pdf:
+    toc: true
+    number-sections: true
 execute:
   warning: false
   message: false
