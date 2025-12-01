@@ -1,7 +1,5 @@
 # PA446-Final
 
-<<<<<<< HEAD
-=======
 **1. Project Overview**
 This project analyzes how neighborhood-level socioeconomic factors (poverty rate, racial composition, linguistic diversity, and educational attainment) are associated with Creative Schools Certification (CSC) outcomes across Chicago ZIP codes.
 The analysis includes data acquisition, cleaning, spatial mapping, regression modeling, and a simple machine learning decision tree.
@@ -21,4 +19,4 @@ This script contains all steps for data loading, cleaning, visualization, and mo
 **4. Reports**
 1) Quarto Report (Reports/Quarto Report.html) - full reproducible analysis
 2) Reflection Memo (Reports/Reflection Memo.pdf) - policy memo summarizing findings
->>>>>>> 9a971a8e1491c3379b6a39100b8b0be854b45c8b
+
