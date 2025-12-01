@@ -15,17 +15,8 @@ Source: Merged dataset created for this project
 Description: Contains ZIP code-level socioeconomic indicators (ACS 5-year estimates) matched with aggregated CSC scores.
 
 **3. How to Replicate the Analysis**
-All scripts are located in the Scripts/ directory and are numbered in order of execution.
-1) Load required packages
-source("Scripts/Step0_RequiredPackages.R")
-2) Acquire or load data
-source("Scripts/Step2_DataAcquisition.R")
-3) Clean and prepare data
-source("Scripts/Step3_DataWrangling_and_QualityChecks.R")
-4) Run descriptive and spatial analysis
-source("Scripts/Step4_ReproducibleReporting_Analysis.R")
-5) Run regression and machine learning models
-source("Scripts/Step5_AdvancedAnalysis_MLR.R")
+The full analysis can be reproduced by running the script Final_Project_Scripts.R, located in the Scripts/ directory of this repository.
+This script contains all steps for data loading, cleaning, visualization, and modeling.
 
 **4. Reports**
 1) Quarto Report (Reports/Quarto Report.html) - full reproducible analysis
