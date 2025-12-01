@@ -4,6 +4,7 @@ author: "Haedodam Kim"
 date: "2025-12-10"
 format:
   html:
+    self-contained: true
     toc: true
     toc-depth: 3
     code-fold: true
