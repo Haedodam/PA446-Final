@@ -212,23 +212,12 @@ arts_full %>%
 arts_full <- arts_full %>%
   drop_na(CSC_score, poverty_rate, pct_nonwhite, pct_non_english, pct_noncollege)
 
-# --------------------------------------------------
-# 6. Save cleaned dataset
-# --------------------------------------------------
-write_csv(arts_full, "arts_full.csv")
-
 # ==========================================================
 # STEP 4: REPRODUCIBLE REPORTING - ANALYSIS
 # ==========================================================
 
 # --------------------------------------------------
-# 1. Load cleaned dataset (from Step 3)
-# --------------------------------------------------
-arts_full <- read_csv("arts_full_clean.csv")
-arts_full <- arts_full %>% mutate(zip = as.character(zip))
-
-# --------------------------------------------------
-# 2. Aggregate data to ZIP level
+# 1. Aggregate data to ZIP level
 # --------------------------------------------------
 # Compute:
 # - average CSC score per ZIP
@@ -246,7 +235,7 @@ zip_summary <- arts_full %>%
   )
 
 # --------------------------------------------------
-# 3. Load Chicago ZCTA shapefile (2020)
+# 2. Load Chicago ZCTA shapefile (2020)
 # --------------------------------------------------
 # 'zctas()' loads ZIP-level geographic boundaries
 chi_zcta <- zctas(cb = TRUE, year = 2020) %>%
@@ -258,7 +247,7 @@ chi_map <- chi_zcta %>%
   left_join(zip_summary, by = "zip")
 
 # --------------------------------------------------
-# 4. Map: Visualize spatial distribution of CSC scores
+# 3. Map: Visualize spatial distribution of CSC scores
 # --------------------------------------------------
 ggplot(chi_map) +
   geom_sf(aes(fill = avg_CSC), color = "white", size = 0.25) +
@@ -270,7 +259,7 @@ ggplot(chi_map) +
   theme_minimal()
 
 # --------------------------------------------------
-# 5. Regression Model:
+# 4. Regression Model:
 #    Which socioeconomic predictors relate to CSC?
 # --------------------------------------------------
 model_all <- lm(
@@ -281,7 +270,7 @@ model_all <- lm(
 summary(model_all)   # Print regression output
 
 # --------------------------------------------------
-# 6. Visualize Regression Coefficients
+# 5. Visualize Regression Coefficients
 # --------------------------------------------------
 tidy(model_all) %>%
   filter(term != "(Intercept)") %>%       # Remove intercept
@@ -301,7 +290,7 @@ tidy(model_all) %>%
   theme_minimal()
 
 # --------------------------------------------------
-# 7. Interactive Shiny Dashboard
+# 6. Interactive Shiny Dashboard
 # --------------------------------------------------
 
 # The dashboard allows:
