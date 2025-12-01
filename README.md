@@ -14,7 +14,8 @@ Description: Contains ZIP code-level socioeconomic indicators (ACS 5-year estima
 
 **3. How to Replicate the Analysis**
 The full analysis can be reproduced by running the script Final_Project_Scripts.R, located in the Scripts/ directory of this repository.
-This script contains all steps for data loading, cleaning, visualization, and modeling.
+This script contains all steps for data loading, cleaning, visualization, and modeling. 
+The interactive dashboard portion of the analysis begins at row 292 of the script.
 
 **4. Reports**
 1) Quarto Report (Reports/Quarto Report.html) - full reproducible analysis
