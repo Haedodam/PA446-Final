@@ -18,6 +18,12 @@ This script contains all steps for data loading, cleaning, visualization, and mo
 The interactive dashboard portion of the analysis begins at row 292 of the script.
 
 **4. Reports**
-1) Quarto Report (Reports/Quarto Report.html) - full reproducible analysis
-2) Reflection Memo (Reports/Reflection Memo.pdf) - policy memo summarizing findings
+1) Quarto Report (Reports/Quarto Report.html, .pdf, .qmd)
+This file contains the full reproducible analysis, including data processing, visualization, statistical modeling, and discussion of results.
+- Quarto Report.qmd: Source file
+- Quarto Report.html: Interactive HTML output
+- Quarto Report.pdf: Static PDF output for submission
+
+2) Reflection Memo (Reports/Reflection Memo.pdf)
+A policy-oriented memo summarizing key findings and implications regarding arts education equity in Chicago Public Schools.
 
